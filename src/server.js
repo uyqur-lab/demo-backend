@@ -19,11 +19,11 @@ export function handle(url, health = checkHealth) {
   if (url === '/api/status') {
     try {
       return health().ok
-        ? { status: 200, body: { status: 'ok' } }
-        : { status: 503, body: { status: 'down' } };
+        ? { status: 200, body: { state: 'ok' } }
+        : { status: 503, body: { state: 'down' } };
     } catch {
       // Tekshiruvning o'zi yiqilsa ham javob kontraktga mos qaytadi.
-      return { status: 503, body: { status: 'down' } };
+      return { status: 503, body: { state: 'down' } };
     }
   }
 
