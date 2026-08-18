@@ -17,6 +17,6 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
       - name: Testlar
-        run: node --test test/
+        run: node --test
       - name: AC gate
         run: bash .github/scripts/ac-gate.sh

@@ -2,5 +2,5 @@
   "name": "demo-backend",
   "version": "0.1.0",
   "type": "module",
-  "scripts": { "start": "node src/server.js", "test": "node --test test/" }
+  "scripts": { "start": "node src/server.js", "test": "node --test" }
 }
