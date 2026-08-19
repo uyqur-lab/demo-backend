@@ -42,7 +42,26 @@ function corsHeaders() {
  *                    buzilgan JSON         → 400 { "error": "invalid_body" }
  *   *                                      → 404 { "error": "not_found" }
  */
+/**
+ * Tasodifiy hex rang kodi.
+ *
+ * `padStart` majburiy: `toString(16)` boshidagi nollarni tushirib qoldiradi,
+ * ya'ni `0x00ff2a` → `"ff2a"` bo'lib qolardi. Xato faqat ba'zan chiqadi —
+ * shuning uchun test 200 marta chaqiradi.
+ */
+function randomHexColor() {
+  return Math.floor(Math.random() * 0x1000000)
+    .toString(16)
+    .padStart(6, '0');
+}
+
 export function handle(url, method = 'GET', body = null) {
+  if (url === '/api/v1/color' && method === 'GET') {
+    // Format kontraktda muzlatilgan: 6 belgi, kichik harf, `#` yo'q.
+    // Klientlar bu matnni o'zgartirmasdan ko'rsatadi (doc.md, PM qarori 1).
+    return { status: 200, body: { color: randomHexColor() } };
+  }
+
   if (url === '/api/v1/hi' && method === 'POST') {
     const parsed = parseBody(body);
     if (!parsed.ok) {
